@@ -1,0 +1,44 @@
+{% extends "../base.html" %}
+{% block title %}
+{% if category %}{{ category.name }}{% else %}Recipes{% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="container" style="max-width: 1000px">
+  <div class="col-12">
+    <h1 class="h2">{{ category.name|title }}</h1>
+  </div>
+  <div class="col-12 d-flex justify-content-between">
+    <div><b>Popular</b> recipes purchased</div>
+  </div>
+  <hr />
+</div>
+<div class="container">
+  <div class="row">
+    <div class="album">
+      {% if not recipes %}
+      <div class="col-12">There are currently no recipes active <a href="{% url 'fresher:fresher_home' %}">Home</a></div>
+      {% else %}
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+        {% for recipe in recipes %}
+        <div class="col">
+          <div class="card border-0">
+            <img class="img-fluid" alt="Responsive image" src="{{ recipe.image.url }}">
+            <div class="card-body px-0">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none" href="{{ recipe.get_absolute_url }}">{{ recipe.title }}</a>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">£{{recipe.price}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
