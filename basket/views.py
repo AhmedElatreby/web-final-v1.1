@@ -16,7 +16,7 @@ def basket_add(request):
     if request.POST.get('action') == 'post':
         recipe_id = int(request.POST.get('recipeid'))
         recipe_qty = int(request.POST.get('recipeqty'))
-        recipe = get_object_or_404(recipe, id=recipe_id)
+        recipe = get_object_or_404(Recipe, id=recipe_id)
         basket.add(recipe=recipe, qty=recipe_qty)
 
         basketqty = basket.__len__()
