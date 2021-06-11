@@ -21,9 +21,9 @@ class TestViewResponses(TestCase):
     def setUp(self):
         self.c = Client()
         User.objects.create(username='admin')
-        Category.objects.create(name='django', slug='django')
-        Recipe.objects.create(category_id=1, title='django beginners', created_by_id=1,
-                               slug='django-beginners', price='20.00', image='django')
+        Category.objects.create(name='recipe', slug='recipe')
+        Recipe.objects.create(category_id=1, title='recipe food', created_by_id=1,
+                            slug='recipe-food', price='20.00', image='recipe')
 
     def test_url_allowed_hosts(self):
         """
@@ -46,7 +46,7 @@ class TestViewResponses(TestCase):
         Test category response status
         """
         response = self.c.get(
-            reverse('fresher:category_list', args=['django']))
+            reverse('fresher:category_list', args=['recipe']))
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_detail_url(self):
@@ -54,7 +54,7 @@ class TestViewResponses(TestCase):
         Test items response status
         """
         response = self.c.get(
-            reverse('fresher:recipe_detail', args=['django-beginners']))
+            reverse('fresher:recipe_detail', args=['recipe-food']))
         self.assertEqual(response.status_code, 200)
 
     def test_homepage_html(self):

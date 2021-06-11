@@ -3,10 +3,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views
-from .forms import (PwdResetConfirmForm, PwdResetForm, UserLoginForm)
-
-# https://docs.djangoproject.com/en/3.1/topics/auth/default/
-# https://ccbv.co.uk/projects/Django/3.0/django.contrib.auth.views/PasswordResetConfirmView/
+from .forms import PwdResetConfirmForm, PwdResetForm, UserLoginForm
 
 app_name = 'account'
 

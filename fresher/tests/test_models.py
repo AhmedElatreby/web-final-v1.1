@@ -8,7 +8,7 @@ from fresher.models import Category, Recipe
 class TestCategoriesModel(TestCase):
 
     def setUp(self):
-        self.data1 = Category.objects.create(name='django', slug='django')
+        self.data1 = Category.objects.create(name='recipe', slug='recipe')
 
     def test_category_model_entry(self):
         """
@@ -16,7 +16,7 @@ class TestCategoriesModel(TestCase):
         """
         data = self.data1
         self.assertTrue(isinstance(data, Category))
-        self.assertEqual(str(data), 'django')
+        self.assertEqual(str(data), 'recipe')
 
     def test_category_url(self):
         """
@@ -30,12 +30,10 @@ class TestCategoriesModel(TestCase):
 
 class TestRecipesModel(TestCase):
     def setUp(self):
-        Category.objects.create(name='django', slug='django')
+        Category.objects.create(name='recipe', slug='recipe')
         User.objects.create(username='admin')
-        self.data1 = Recipe.objects.create(category_id=1, title='django beginners', created_by_id=1,
-                                            slug='django-beginners', price='20.00', image='django')
-        self.data2 = Recipe.recipes.create(category_id=1, title='django advanced', created_by_id=1,
-                                             slug='django-advanced', price='20.00', image='django', is_active=False)
+        self.data1 = Recipe.objects.create(category_id=1, title='recipe beginners', created_by_id=1,
+                                        slug='recipe-food', price='20.00', image='recipe')
 
     def test_recipes_model_entry(self):
         """
@@ -43,7 +41,7 @@ class TestRecipesModel(TestCase):
         """
         data = self.data1
         self.assertTrue(isinstance(data, Recipe))
-        self.assertEqual(str(data), 'django beginners')
+        self.assertEqual(str(data), 'recipe food')
 
     def test_recipes_url(self):
         """
@@ -51,7 +49,7 @@ class TestRecipesModel(TestCase):
         """
         data = self.data1
         url = reverse('fresher:recipe_detail', args=[data.slug])
-        self.assertEqual(url, '/django-beginners')
+        self.assertEqual(url, '/recipe-food')
         response = self.client.post(
             reverse('fresher:recipe_detail', args=[data.slug]))
         self.assertEqual(response.status_code, 200)

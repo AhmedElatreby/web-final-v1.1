@@ -19,7 +19,6 @@ INSTALLED_APPS = [
     'fresher',
     'basket',
     'account',
-    'orders',
 ]
 
 MIDDLEWARE = [

@@ -1,49 +1,51 @@
 {% extends "base.html" %}
-{% block title %}Fresher{% endblock %}
+{% block title %}Fresher Food{% endblock %}
 {% block content %}
 
 <div class="container">
- <div class="container md-3">
+  <div class="container align-items-center md-3">
     <div class="row p-10 pb-0 pe-lg-0 pt-lg-1 align-items-center rounded-3 border shadow-lg">
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-1">
-        <h1 class="display-3 fw-bold lh-4">Don't just cook it, Fresher it!</h1>
-        <p class="lead">Our recipes are created by Fresher to bring you the fullest flavour and the most succulent dishes for all occasions… from family meals & snacks to dinner party entertaining.</p>
+        <h1 class="display-4 fw-bold lh-5">Don't just cook it, Fresher it!</h1>
+        <p class="lead">Our recipes are created by Fresher to bring you the fullest flavour and the most succulent
+          dishes for all occasions… from family meals & snacks to dinner party entertaining.</p>
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-          <img class="rounded-lg-3" src="https://diatribe.org/sites/default/files/images/healthy%20eating.jpg" alt="" width="640">
-      </div>
-    </div>
-  </div>
-    
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="album py-5">
-        <div class="pb-3">
-          <h1 class="h3">Popular</h1>
-        </div>
-        {% if not recipes %}
-        <div class="col-12">There are currently no recipes active</div>
-          {% else %}
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-          {% for recipe in recipes %}
-          <div class="col">
-            <div class="card border-0">
-              <img class="img-fluid" alt="Responsive image" src="{{ recipe.image.url }}">
-              <div class="card-body px-0">
-                <p class="card-text">
-                  <a class="text-dark text-decoration-none"
-                    href="{{ recipe.get_absolute_url }}">{{ recipe.title|slice:":50" }}...</a>
-                </p>
-                <div class="fw-bold">£{{recipe.price}}</div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        {% endif %}
+        <img class="rounded-md-3" src="https://diatribe.org/sites/default/files/images/healthy%20eating.jpg" alt=""
+          width="580">
       </div>
     </div>
   </div>
 
-  {% endblock %}
+</div>
+<div class="container">
+  <div class="row">
+    <div class="album py-5">
+      <div class="pb-3">
+        <h1 class="h3">Our Popular Recipes</h1>
+      </div>
+      {% if not recipes %}
+      <div class="col-12">There are currently no recipes active</div>
+      {% else %}
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+        {% for recipe in recipes %}
+        <div class="col">
+          <div class="card border-0">
+            <img class="img-fluid" alt="Responsive image" src="{{ recipe.image.url }}">
+            <div class="card-body px-0">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none"
+                  href="{{ recipe.get_absolute_url }}">{{ recipe.title|slice:":50" }}...</a>
+              </p>
+              <div class="fw-bold">£{{recipe.price}}</div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

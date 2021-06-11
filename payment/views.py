@@ -2,15 +2,14 @@ import json
 import os
 
 import stripe
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
-from django.conf import settings
 
 from basket.basket import Basket
-from orders.views import payment_confirmation
 
 
 def order_placed(request):
@@ -38,8 +37,8 @@ def BasketView(request):
         metadata={'userid': request.user.id}
     )
 
-    return render(request, 'payment/payment_form.html', {'client_secret': intent.client_secret, 
-                                                            'STRIPE_PUBLISHABLE_KEY': os.environ.get('STRIPE_PUBLISHABLE_KEY')})
+    return render(request, 'payment/payment_form.html', {'client_secret': intent.client_secret,
+                    'STRIPE_PUBLISHABLE_KEY': os.environ.get('STRIPE_PUBLISHABLE_KEY')})
 
 
 @csrf_exempt
@@ -57,7 +56,7 @@ def stripe_webhook(request):
 
     # Handle the event
     if event.type == 'payment_intent.succeeded':
-        payment_confirmation(event.data.object.client_secret)
+        (event.data.object.client_secret)
 
     else:
         print('Unhandled event type {}'.format(event.type))

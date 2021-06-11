@@ -39,7 +39,6 @@ class Recipe(models.Model):
     recipes = RecipeManager()
 
     class Meta:
-        verbose_name_plural = 'Recipes'
         ordering = ('-created',)
 
     def get_absolute_url(self):
